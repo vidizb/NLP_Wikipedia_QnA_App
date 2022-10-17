@@ -49,7 +49,8 @@ def get_wiki_extract(url):
 
 def get_answers(question, url):
     # question_answerer = pipeline("question-answering", model='../models/distilbert-base-cased-distilled-squad')
-    question_answerer = pipeline("question-answering", model='distilbert-base-cased-distilled-squad')
+    # question_answerer = pipeline("question-answering", model='distilbert-base-cased-distilled-squad')
+    question_answerer = pipeline("question-answering", model='deepset/roberta-base-squad2')
     wiki_extract = get_wiki_extract(url)    
     answers = []
     for section in wiki_extract:

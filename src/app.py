@@ -1,12 +1,15 @@
 import streamlit as st
+from PIL import Image
 import base64
 import time
 import wikipedia
 
-st.set_page_config(layout="wide")
+st.set_page_config(
+    page_title="Wikipedia QnA",
+    page_icon=Image.open("logo.png"),
+    layout="wide",
+)
 
-LOGO_IMAGE = "logo.png"
-PAGE_TITLE = "Wikipedia QnA"
 st.markdown(
     """
     <style>
@@ -29,8 +32,8 @@ st.markdown(
 st.markdown(
     f"""
     <div class="container">
-        <img class="logo-img" src="data:image/png;base64,{base64.b64encode(open(LOGO_IMAGE, "rb").read()).decode()}" width=70 height=70>
-        <p class="logo-text">{PAGE_TITLE}</p>
+        <img class="logo-img" src="data:image/png;base64,{base64.b64encode(open("logo.png", "rb").read()).decode()}" width=70 height=70>
+        <p class="logo-text">{"Wikipedia QnA"}</p>
     </div>
     """,
     unsafe_allow_html=True

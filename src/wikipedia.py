@@ -1,5 +1,5 @@
-from bs4 import BeautifulSoup
 import requests
+from bs4 import BeautifulSoup
 import re
 import pandas as pd
 
@@ -14,7 +14,7 @@ def get_soup(url):
 
     return soup
 
-def clean_paragraph(text):
+def clean_wiki_content(text):
     text = re.sub("\[\d+\]", "" , text)
     text = text.replace("[edit]", "")
 
@@ -29,7 +29,7 @@ def get_paragraph_text(p):
 
 def get_wiki_extract(url):
     soup = get_soup(url) 
-    headers = ['h1', 'h2', 'h3', 'h4']
+    headers = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6']
     wiki_extract = []
     for tag in soup.find_all():
         if tag.name in headers and tag.text != 'Contents':
@@ -42,14 +42,12 @@ def get_wiki_extract(url):
                 if ne.name in headers:
                     break
             if p != '':
-                section = [clean_paragraph(tag.text), tag.name, clean_paragraph(p)]
+                section = [clean_wiki_content(tag.text), tag.name, clean_wiki_content(p)]
                 wiki_extract.append(section)
         
     return wiki_extract
 
 def get_answers(question, url):
-    # question_answerer = pipeline("question-answering", model='../models/distilbert-base-cased-distilled-squad')
-    # question_answerer = pipeline("question-answering", model='distilbert-base-cased-distilled-squad')
     question_answerer = pipeline("question-answering", model='deepset/roberta-base-squad2')
     wiki_extract = get_wiki_extract(url)    
     answers = []

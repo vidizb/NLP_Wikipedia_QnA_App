@@ -7,10 +7,7 @@ name = "pypi"
 streamlit = "==1.13.0"
 transformers = "*"
 torch = "*"
-jupyterlab = "*"
-ipywidgets = "*"
 bs4 = "*"
-nltk = "*"
 
 [dev-packages]
 

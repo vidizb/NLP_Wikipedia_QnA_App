@@ -1,0 +1,8 @@
+streamlit==1.13.0
+transformers
+torch
+bs4
+wikipedia
+requests
+re
+pandas
